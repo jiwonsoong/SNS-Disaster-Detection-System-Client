@@ -1,0 +1,129 @@
+* {
+    /* border: 1px solid red; */
+  }
+  
+  html {
+    height: 100%;
+  }
+  
+  body {
+      margin: 0;
+      height: 100%;
+      background-color: #161d26;
+      /* color: white; */
+      color: rgba(255, 255, 255, 0.788);
+  
+    }
+  
+  main {
+    display: flex;
+    height: 100%;
+  }
+  
+  nav{
+    /* flex: 1; */
+    margin: 0;
+    padding: 0;
+    min-width: 50px;
+    background-color: #1f2936;
+    /* position: fixed; */
+    height: 100%;
+    overflow: auto;
+    font-size: 0.8em;
+    display: flex;
+    flex-direction: column;
+  }
+  article {
+    /* flex: 4; */
+    height: 100vh;
+    font-size: 0.8em;
+    width: 100%;
+  }
+  
+  .menu {
+    flex: 8;
+    padding: 2px 10px;
+  }
+  .menu .logo{
+    flex: 1;
+    padding: 8px 16px;
+    color: #17a9a8;
+  }
+  .menu .login {
+    flex: 1;
+    padding: 2px 10px;
+  }
+  .menu .team-logo{
+    flex: 1;
+    padding: 2px 8px;
+    font-style: italic;
+  }
+  
+  .menu ul{
+    list-style-type: none;
+    padding-left:0px;
+  }
+  .menu li{
+    margin: 10px 0px;
+  }
+  .menu li a {
+    display: block;
+    /* color: white; */
+    color: rgba(255, 255, 255, 0.788);
+    text-decoration: none;
+  }
+  .menu .tooltip-icon:active {
+    color: #17a9a8;
+  }
+  .menu .tooltip-icon:hover:not(.active) {
+    color: #17a9a8;
+  }
+
+  .tooltip-icon{
+    font-size: 25px;
+    color: white;
+  }
+  .redo {
+    margin: 15px auto;
+  }
+  .redo .redo-button {
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+    font-size: 1.4em;
+    color: rgba(255, 255, 255, 0.479);
+  }
+
+  .container{
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    /* border: 1px solid red; */
+    padding: 20px 25px;
+    grid-gap: 20px;
+  }
+  
+  .item {
+    background-color: #1f2936;
+    padding: 15px 20px;
+    /* border: 1px solid red; */
+    box-shadow: 1px 1px 10px 2px #a5def023;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .item:nth-child(10) {
+    grid-column-start: 2;
+    grid-column-end: 5;
+    grid-row-start: 3;
+    grid-row-end: 4;
+  }
+  
+  .chartLine-wrapper {
+    height: 88%;
+  }
+  

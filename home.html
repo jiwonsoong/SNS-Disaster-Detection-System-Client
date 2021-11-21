@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./public/css/home.css">
+    <link rel="stylesheet" href="./public/css/modal.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" defer></script>
+    <script src="./public/js/index.js" defer></script>
+    <script type="module" src="./public/js/request.js" defer></script>
+    <script src="./public/js/modal.js" defer></script>
+    <script type="module" src="./public/js/sns.js" defer></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>home</title>
+</head>
+<body>
+    <main>
+        <div class="modal hide">
+            <div class="modal-item">
+                <div class="modal-content">
+                    <div class="modal-icon" style="font-size: 5.5em; color: rgba(255, 218, 55, 0.801)"><i class="fas fa-exclamation-circle"></i></div>
+                    <div class="modal-text">
+                        <div style="font-size: 1.5em; margin-bottom: 20px">이상 상태 알림</div>
+                        <div style="font-size: 0.9em">재난 상황으로 추정됩니다.</div> 
+                    </div>
+                </div>
+                <div class="modal-button">
+                    <button onclick=sendMail() style="background-color: rgba(252, 92, 101,0.8);">관리자에게 메일보내기</button>
+                    <button onclick="cancelModal()" style="background-color: rgba(69, 170, 242,0.8);">취소</button> 
+                </div>
+            </div>
+        </div>
+        <nav>
+            <div class="menu">
+                <ul>
+                    <li>
+                        <a class="active" href="#">
+                            <div class="tooltip-icon" title="대시보드"><i class="fas fa-home"></i></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="active" href="#charts">
+                            <div class="tooltip-icon" title="시간대별 재난 언급량"><i class="fas fa-chart-bar fa-far"></i></div>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="tooltip-icon"a title="관리자에게 메일 전송" onclick=showModal()><i class="fas fa-exclamation-triangle"></i></div> 
+                    </li>
+                </ul>
+            </div>
+            <div class="redo">
+                <button class="redo-button" type="button" onclick=redoDashboard() title="데이터 업데이트"><i class="fas fa-redo-alt fa-rotate-270"></i></button>     
+            </div>
+        </nav>
+
+        <article>
+            <div class="container">
+                <div class="item">
+                    <span>실시간 재난 언급량 </span>
+                    <div class="chart-wrapper">
+                        <div class="chartRank">
+                            <div class="graph-item">
+                                <div class="rank">1</div>
+                                <div class="name">코로나</div>
+                            </div>
+                            <div class="graph-item">
+                                <div class="rank">2</div>
+                                <div class="name">붕괴</div>
+                            </div>
+                            <div class="graph-item">
+                                <div class="rank">3</div>
+                                <div class="name">폭설</div>
+                            </div>
+                            <div class="graph-item">
+                                <div class="rank">4</div>
+                                <div class="name">교통사고</div>
+                            </div>
+                            <div class="graph-item">
+                                <div class="rank">5</div>
+                                <div class="name">산불</div>
+                            </div>
+                            <div class="graph-item">
+                                <div class="rank">6</div>
+                                <div class="name">화재</div>
+                            </div>
+                            <div class="graph-item">
+                                <div class="rank">7</div>
+                                <div class="name">폭발</div>
+                            </div>
+                            <div class="graph-item">
+                                <div class="rank">8</div>
+                                <div class="name">홍수</div>
+                            </div>
+                            <div class="graph-item">
+                                <div class="rank">9</div>
+                                <div class="name">태풍</div>
+                            </div>
+                        </div>
+                        <div class="chartBar-wrapper"><canvas id="chartBar" style="width: 100%; height: 140%;"></canvas></div>                        
+                    </div>
+                </div>
+                <div class="item">
+                    <span>시간대별 재난 언급량
+                    </span>
+                    <div class="chartLine-wrapper"><canvas id="chartLine" style="width: 100%; height: 100% !important;"></canvas></div>
+                </div>
+                <div class="item" id="item-sns">
+                    <span>실시간 SNS</span>
+                    <div class="sns-wrapper">
+                        <div class="sns">
+                            <div class="content-icon"><i class="fab fa-instagram"> instagram</i></div>
+                            <div class="sns-content">다리 무사하닝...</div>
+                        </div>
+                        <div class="sns">
+                            <div class="content-icon"><i class="fab fa-twitter"> twitter</i></div>
+                            <div class="sns-content">[포토] 인천 효성동 다세대주택서 화재 발생 https://t.co/ykSxUubW7z</div>
+                        </div><div class="sns">
+                            <div class="content-icon"><i class="fab fa-twitter"> twitter</i></div>
+                            <div class="sns-content">쿠팡 물류센터 화재 발생 당일 이재명의 중요한 공식일정이 다 끝났으면 빨리 화재현장으로 달려와 콘트론타워 진두지휘를 해야 하는데..!⤵️\n보고 받고 지시 다했다는 변명으로 일관하다가 이재명은 사과 기자회견도 아닌 게시글 한…</div>
+                        </div><div class="sns">
+                            <div class="content-icon"><i class="fab fa-instagram"> instagram</i></div>
+                            <div class="sns-content">불금 이었다...🔥🔥🔥</div>
+                        </div>
+                        <div class="sns">
+                            <div class="content-icon"> naver blog</div>
+                            <div class="sns-content">고기 빨리 구우려다 _부탄가스 폭발_…일가족 9명 화상 _ SBS</div>
+                        </div>
+                        <div class="sns">
+                            <div class="content-icon"><i class="fab fa-twitter"> twitter</i></div>
+                            <div class="sns-content">임창정의 코로나19 확진은 결국 연예·방송가에도 영향을 끼치게 됐다. ‘유희열의 스케치북’ ‘미운우리새끼’ ‘신과함께 시즌2’ ‘할명수’ 등 다수 방송에 출연했고 여러 라디오 프로그램 게스트에도 출연했다. 임창정과 함께…</div>
+                        </div><div class="sns">
+                            <div class="content-icon"><i class="fab fa-instagram"> instagram</i></div>
+                            <div class="sns-content">대박 겨울왕국 시작입니다~^^</div>
+                        </div><div class="sns">
+                            <div class="content-icon"><i class="fab fa-instagram"> instagram</i></div>
+                            <div class="sns-content">캠장에서첫눈은 축복이아닐지요 뭔가 기분좋은 느낌입니다😍 안전히 돌아오셔요❤️</div>
+                        </div><div class="sns">
+                            <div class="content-icon"><i class="fab fa-instagram"> instagram</i></div>
+                            <div class="sns-content">사람들 피드 구경하다가 타고 들어왔어요! 팔로우해요^^</div>
+                        </div><div class="sns">
+                            <div class="content-icon"><i class="fab fa-instagram"> instagram</i></div>
+                            <div class="sns-content">피치림님의 폭설 고립영상을 좋아하는1인🥺🤍🤍그 영상 진짜 여러번 봤어요 히히 생각난 김에 또볼거야..🤍안전하게 다녀오세요!!🤟🏻</div>
+                        </div>
+                        <div class="sns">
+                            <div class="content-icon"><i class="fab fa-instagram"> instagram</i></div>
+                            <div class="sns-content">내용</div>
+                        </div><div class="sns">
+                            <div class="content-icon"><i class="fab fa-instagram"> instagram</i></div>
+                            <div class="sns-content">내용</div>
+                        </div><div class="sns">
+                            <div class="content-icon"><i class="fab fa-instagram"> instagram</i></div>
+                            <div class="sns-content">내용</div>
+                        </div><div class="sns">
+                            <div class="content-icon"><i class="fab fa-instagram"> instagram</i></div>
+                            <div class="sns-content">내용</div>
+                        </div><div class="sns">
+                            <div class="content-icon"><i class="fab fa-instagram"> instagram</i></div>
+                            <div class="sns-content">내용</div>
+                        </div>
+                        <div class="sns">
+                            <div class="content-icon"><i class="fab fa-instagram"> instagram</i></div>
+                            <div class="sns-content">내용</div>
+                        </div><div class="sns">
+                            <div class="content-icon"><i class="fab fa-instagram"> instagram</i></div>
+                            <div class="sns-content">내용</div>
+                        </div><div class="sns">
+                            <div class="content-icon"><i class="fab fa-instagram"> instagram</i></div>
+                            <div class="sns-content">내용dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd</div>
+                        </div><div class="sns">
+                            <div class="content-icon"><i class="fab fa-instagram"> instagram</i></div>
+                            <div class="sns-content">내용</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </main>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./public/css/charts.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" defer></script>
+    <script src="./public/js/index.js" defer></script>
+    <script type="module" src="./public/js/request.js" defer></script>
+    <script src="./public/js/charts.js" defer></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>charts</title>
+</head>
+<body>
+    <main>
+        <nav>
+            <div class="menu">
+                <ul>
+                    <li>
+                        <a class="active" href="#">
+                            <div class="tooltip-icon" title="대시보드"><i class="fas fa-home"></i></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="active" href="#charts">
+                            <div class="tooltip-icon" title="시간대별 재난 검색 양"><i class="fas fa-chart-bar fa-far"></i></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="active" href="#">
+                            <div class="tooltip-icon" title="SNS"><i class="fas fa-comments fa-far"></i></div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="redo">
+                <button class="redo-button" type="button" onclick=redoCharts() title="데이터 업데이트"><i class="fas fa-redo-alt fa-rotate-270"></i></button>     
+            </div>
+        </nav>
+
+        <article>
+            <div class="container">
+                <!-- 
+                    1. 폭설
+                    2. 코로나
+                    3. 교통사고
+                    4. 산불
+                    5. 붕괴
+                    6. 폭발
+                    7. 화재
+                    8. 태풍
+                    9. 홍수
+                 -->
+                <div class="item">
+                    <span>폭설</span>
+                    <div class="chartLine-wrapper"><canvas id="chartLine1" style="width: 100%; height: 100%"></canvas></div>
+                </div>
+                <div class="item">
+                    <span>코로나</span>
+                    <div class="chartLine-wrapper"><canvas id="chartLine2" style="width: 100%; height: 100%"></canvas></div>
+                </div>
+                <div class="item">
+                    <span>교통사고</span>
+                    <div class="chartLine-wrapper"><canvas id="chartLine3" style="width: 100%; height: 100%"></canvas></div>
+                </div>
+                <div class="item">
+                    <span>산불</span>
+                    <div class="chartLine-wrapper"><canvas id="chartLine4" style="width: 100%; height: 100%"></canvas></div>
+                </div>
+                <div class="item">
+                    <span>붕괴</span>
+                    <div class="chartLine-wrapper"><canvas id="chartLine5" style="width: 100%; height: 100%"></canvas></div>
+                </div>
+                <div class="item">
+                    <span>폭발</span>
+                    <div class="chartLine-wrapper"><canvas id="chartLine6" style="width: 100%; height: 100%"></canvas></div>
+                </div>
+                <div class="item">
+                    <span>화재</span>
+                    <div class="chartLine-wrapper"><canvas id="chartLine7" style="width: 100%; height: 100%"></canvas></div>
+                </div>
+                <div class="item">
+                    <span>태풍</span>
+                    <div class="chartLine-wrapper"><canvas id="chartLine8" style="width: 100%; height: 100%"></canvas></div>
+                </div>
+                <div class="item">
+                    <span>홍수</span>
+                    <div class="chartLine-wrapper"><canvas id="chartLine9" style="width: 100%; height: 100%"></canvas></div>
+                </div>
+                <div class="item">
+                    <span>전체</span>
+                    <div class="chartLine-wrapper"><canvas id="chartLine" style="width: 100%; height: 100%"></canvas></div>
+                </div>
+            </div>
+        </article>
+        
+    </main>
+</body>
+</html>
