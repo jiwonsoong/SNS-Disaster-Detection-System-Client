@@ -1,7 +1,7 @@
 # SNS Disaster Detection System / SNS 재난 감지 시스템
 
 ## Overview
-
+Use chart.js
 
 ## Preview
 ### Dashboard
