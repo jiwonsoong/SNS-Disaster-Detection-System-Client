@@ -1,7 +1,7 @@
 # SNS Disaster Detection System / SNS 재난 감지 시스템
 
 ## Overview
-Use chart.js
+chart.js 라이브러리를 이용해 데이터 대시보드를 개발했습니다.
 
 ## Preview
 ### Dashboard
